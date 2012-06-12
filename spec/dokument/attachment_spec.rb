@@ -20,9 +20,14 @@ describe Dokument::Attachment do
     @attachment.data.should eq(@data)
   end
 
-  it "delegates saving to it's robject" do
+  it "delegates saving to its robject" do
     @attachment.robject.should_receive(:store)
     @attachment.save
+  end
+
+  it "delegates options passed to save to the robject when storing" do
+    @attachment.robject.should_receive(:store).with(:awesome => true)
+    @attachment.save(:awesome => true)
   end
 
   describe "completeness" do
@@ -47,11 +52,11 @@ describe Dokument::Attachment do
   end
 
   describe "robject" do
-    it "uses the attachments data" do
+    it "uses the attachment's data" do
       @attachment.robject.data.should eq(@data)
     end
 
-    it "uses the attachments content_type" do
+    it "uses the attachment's content_type" do
       @attachment.robject.content_type.should eq(@content_type)
     end
 
@@ -59,7 +64,7 @@ describe Dokument::Attachment do
       @attachment.robject.key.should eq(@model.id.to_s)
     end
 
-    it "uses the associations bucket for the bucket name" do
+    it "uses the association's bucket for the bucket name" do
       @attachment.robject.bucket.name.should eq(@association.bucket)
     end
   end

@@ -17,9 +17,9 @@ module Dokument
       @robject ||= bucket.get_or_new(model.send(association.key).to_s)
     end
 
-    def save
+    def save(options={})
       raise IncompleteError.new("Attachment is missing content_type or data (#{inspect})") unless complete?
-      robject.store
+      robject.store(options)
     end
 
     def incomplete?
