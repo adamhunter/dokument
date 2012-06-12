@@ -10,6 +10,11 @@ describe Dokument::Model do
       ExampleModel.dokument :file
       ExampleModel.dokuments[:file].should be_a(Dokument::Association)
     end
+
+    it "accepts options with the `dokument` class method" do
+      ExampleModel.dokument :file, :bucket => 'files'
+      ExampleModel.dokuments[:file].bucket.should eq('files')
+    end
   end
 
   describe "provided instance methods" do
