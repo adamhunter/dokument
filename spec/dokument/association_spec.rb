@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Dokument::Association do
 
   before :each do 
-    @association = Dokument::Association.new(:file)
+    @association = Dokument::Association.new(:file, ExampleModel)
   end
 
   it "take a name upon initialization" do
@@ -23,14 +23,14 @@ describe Dokument::Association do
       @association.key.should eq(:id)
     end
 
-    it "defaults the bucket to the string version of the name" do
-      @association.bucket.should eq('file')
+    it "defaults the bucket to the string version of the name with the model class" do
+      @association.bucket.should eq('ExampleModel_file')
     end
   end
 
   describe "initialization options" do
     before :each do
-      @association = Dokument::Association.new(:file, :bucket => 'files_bucket', :key => 'some_id')
+      @association = Dokument::Association.new(:file, ExampleModel, :bucket => 'files_bucket', :key => 'some_id')
     end
 
     it "can set the bucket name" do

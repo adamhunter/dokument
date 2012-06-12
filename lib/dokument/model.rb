@@ -11,7 +11,7 @@ module Dokument
       end
 
       def dokument(name, options={})
-        dokuments[name] = Association.new(name)
+        dokuments[name] = Association.new(name, self, options)
         add_association_reader(name)
       end
 

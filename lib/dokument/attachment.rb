@@ -35,7 +35,7 @@ module Dokument
     def bucket
       Dokument.client[association.bucket]
     end
-
+    
     class IncompleteError < StandardError ; end
 
   end

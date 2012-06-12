@@ -1,11 +1,12 @@
 module Dokument
   class Association
 
-    attr_accessor :name, :key, :bucket
+    attr_accessor :name, :owner, :key, :bucket
 
-    def initialize(name, options = {})
+    def initialize(name, owner, options = {})
       self.name   = name
-      self.bucket = options[:bucket] || name.to_s
+      self.owner  = owner
+      self.bucket = options[:bucket] || "#{owner.name}_#{name}"
       self.key    = options[:key]    || :id
     end
 
