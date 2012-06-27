@@ -20,6 +20,16 @@ describe Dokument::Attachment do
     @attachment.data.should eq(@data)
   end
 
+  it "delegates data to raw_data" do
+    @attachment.should_receive(:raw_data)
+    @attachment.data
+  end
+
+  it "delegates data= to raw_data=" do
+    @attachment.should_receive(:raw_data=).with('awesome')
+    @attachment.data = 'awesome'
+  end
+
   it "delegates saving to its robject" do
     @attachment.robject.should_receive(:store)
     @attachment.save

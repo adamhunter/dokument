@@ -4,7 +4,7 @@ module Dokument
   class Attachment
     extend Forwardable
 
-    delegate %w[data data= content_type content_type=] => :robject
+    delegate %w[raw_data raw_data= content_type content_type=] => :robject
 
     attr_reader :model, :association
 
@@ -15,6 +15,14 @@ module Dokument
 
     def robject
       @robject ||= bucket.get_or_new(model.send(association.key).to_s)
+    end
+
+    def data
+      raw_data
+    end
+
+    def data=(value)
+      self.raw_data = value
     end
 
     def save(options={})
